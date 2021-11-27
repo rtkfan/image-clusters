@@ -1,0 +1,4 @@
+# don't keep track of the actual images
+images/*.gif
+images/*.jpg
+images/*.png
