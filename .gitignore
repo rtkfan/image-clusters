@@ -2,3 +2,5 @@
 images/*.gif
 images/*.jpg
 images/*.png
+
+.DS_Store
