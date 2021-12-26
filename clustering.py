@@ -34,7 +34,7 @@ logging.basicConfig(format='%(asctime)s %(message)s',
                     level=logging.INFO)
 
 DATADIR = './images'
-NUM_CLUSTERS = 3
+NUM_CLUSTERS = 4
 
 with os.scandir(DATADIR) as files:
     filenames = [ifile.name for ifile in files
@@ -64,3 +64,4 @@ kmeans = KMeans(n_clusters=NUM_CLUSTERS)
 kmeans.fit(x)
 
 ic(kmeans.labels_)
+ic(kmeans.inertia_)
