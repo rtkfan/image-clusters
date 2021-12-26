@@ -8,4 +8,6 @@ I originally started this after [Google deprecated](https://9to5google.com/2021/
 | -- |
 | Example Sweet Mini. I've sent hundreds of these. Don't judge me! |
 
+The actual clustering is based largely on [this article](https://towardsdatascience.com/how-to-cluster-images-based-on-visual-similarity-cd6e7209fe34). I'll run this with a variety of cluster counts, and see which one gives me the lowest k-means inertia. As separate instances of these images should be effectively identical, I expect the inertia to actually be 0 when I've identified the right number of clusters.
+
 I'll use this to identify individual images, and then upload a deduplicated set somewhere I can continue to send these!
