@@ -1,6 +1,7 @@
 from icecream import ic
 import os
 import logging
+from tqdm import tqdm
 
 from keras.preprocessing.image import load_img
 from keras.preprocessing.image import img_to_array
@@ -34,7 +35,6 @@ logging.basicConfig(format='%(asctime)s %(message)s',
                     level=logging.INFO)
 
 DATADIR = './images'
-NUM_CLUSTERS = 4
 
 with os.scandir(DATADIR) as files:
     filenames = [ifile.name for ifile in files
@@ -47,21 +47,28 @@ model = Model(inputs = model.inputs, outputs = model.layers[-2].output)
 
 data = {}
 
-for ifile in filenames[:5]:
+logging.info(f'Loading and preprocessing {len(filenames)} images from datadir')
+for ifile in tqdm(filenames):
     load_path = os.path.join(DATADIR,ifile)
-    logging.info(f'Load {load_path}')
     feat = extract_features(load_path,model)
     data[ifile] = feat
 
 feat = np.array(list(data.values()))
 feat = feat.reshape(-1,4096)
 
-pca = PCA(n_components=3, random_state = 22)
+pca = PCA(n_components=0.95)
 pca.fit(feat)
 x = pca.transform(feat)
 
-kmeans = KMeans(n_clusters=NUM_CLUSTERS)
-kmeans.fit(x)
+logging.info(f'PCA reduced dimensionality to {pca.n_components_}')
 
-ic(kmeans.labels_)
-ic(kmeans.inertia_)
+i = 1
+objective = 1
+
+while i <= len(filenames) and objective > 1e-9:
+    kmeans = KMeans(n_clusters=i)
+    kmeans.fit(x)
+    objective = kmeans.inertia_
+    testout = max(kmeans.labels_)
+    logging.info(f'K-Means with {i} clusters yields inertia {objective}')
+    i+=1
