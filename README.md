@@ -1,5 +1,7 @@
 # Image clustering
 
+Edit (Dec 2023): [clustimage](https://github.com/erdogant/clustimage) seems to provide a convenient interface around what I was trying to do, below.  Let's try that, for simplicity!
+
 Playing around with various clustering libraries and preprocessing steps to group together similar-looking images.
 
 I originally started this after [Google deprecated](https://9to5google.com/2021/09/28/gboard-minis-going-away-october/) their ["Minis" custom stickers](https://ai.googleblog.com/2017/05/neural-network-generated-illustrations.html). I used [Takeout](https://takeout.google.com) to download my Hangouts/Chat history, but there were multiple copies of each sticker that I used multiple times. Seeing as that I wanted to practice doing clustering, this was the perfect opportunity to put this to use.
