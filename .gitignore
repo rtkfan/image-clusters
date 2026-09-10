@@ -3,4 +3,11 @@ images/*.gif
 images/*.jpg
 images/*.png
 
+# script outputs (deduplicated set, plots)
+output/
+
+# python
+.venv/
+__pycache__/
+
 .DS_Store
